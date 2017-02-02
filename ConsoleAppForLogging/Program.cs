@@ -8,6 +8,7 @@ namespace ConsoleAppForLogging
         static void Main(string[] args)
         {
             var info = new LogInfo(LogType.Utilization);
+            info.SenderTimestamp = DateTime.Now.ToString("O");//.Replace(" ", "T");
 
             SuperLogger.Write(info);
 
@@ -20,6 +21,7 @@ namespace ConsoleAppForLogging
             catch (Exception ex)
             {
                 var logMsg = new LogInfo(LogType.Utilization);
+                logMsg.SenderTimestamp = DateTime.Now.ToString("O");//.Replace(" ", "T");
                 logMsg.MessageException = ex;
                 SuperLogger.Write(logMsg);
             }
