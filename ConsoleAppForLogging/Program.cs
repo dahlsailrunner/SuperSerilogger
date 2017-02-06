@@ -9,6 +9,8 @@ namespace ConsoleAppForLogging
         {
             var info = new LogInfo(LogType.Utilization);
             info.SenderTimestamp = DateTime.Now.ToString("O");//.Replace(" ", "T");
+            info.PmcId = "12354";
+            info.PmcName = "Dahl Properties";
 
             SuperLogger.Write(info);
 
@@ -16,6 +18,7 @@ namespace ConsoleAppForLogging
             {
                 var exceptional = new Exception("Craziness!");
                 exceptional.Data.Add("CustomProp", "Wowweeee");
+                exceptional.Data.Add("Unbelievable", "We did it!");
                 throw exceptional;
             }
             catch (Exception ex)

@@ -10,7 +10,7 @@ using Serilog.Sinks.Elasticsearch;
 
 namespace SuperSerilogger
 {
-    public class UtilizationJsonFormatter : ElasticsearchJsonFormatter
+    public class UtilizationJsonFormatter : CustomElasticsearchJsonFormatter
     {
         private readonly string _propertyNameToBeTreatedAsSource;
 
@@ -29,9 +29,9 @@ namespace SuperSerilogger
         {
             var precedingDelimiter = "";
             foreach (var property in properties)
-            {
+            {                
                 if (property.Key.ToLowerInvariant() == _propertyNameToBeTreatedAsSource)
-                {
+                {                   
                     if (property.Value is DictionaryValue)
                         WriteDictionaryWithoutWrapping(((DictionaryValue)property.Value).Elements, output);
                     else if (property.Value is StructureValue)
