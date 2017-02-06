@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="superlogger.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="logging.config">

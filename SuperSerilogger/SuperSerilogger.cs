@@ -3,6 +3,7 @@ using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using System;
 using System.Collections.Generic;
+using Serilog.Events;
 
 namespace SuperSerilogger
 {    
@@ -13,11 +14,10 @@ namespace SuperSerilogger
 
         static SuperLogger()
         {
-
             _informationLogger = new LoggerConfiguration()
                 //.WriteTo.ColoredConsole()                
                 .WriteTo.File(formatter: new UtilizationJsonFormatter("UtilizationLogStructure"), path:"log.json")
-                .WriteTo.File(formatter: new ElasticsearchJsonFormatter(), path: "log.json")
+                //.WriteTo.File(formatter: new ElasticsearchJsonFormatter(), path: "log.json")
                 
                 //.ReadFrom.AppSettings(settingPrefix: "utilization", filePath: @"C:\Users\edahl\Source\Repos\SuperSerilogger\SuperSerilogger\logging.config")
                 .CreateLogger();
@@ -27,9 +27,19 @@ namespace SuperSerilogger
                 .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
                 {
                     AutoRegisterTemplate = true,
-                    CustomFormatter = new UtilizationJsonFormatter("UtilizationLogStructure")
+                    //CustomFormatter = new UtilizationJsonFormatter("UtilizationLogStructure"),
+                    //TypeName = "logs",
+                    //IndexDecider = DecideIndex,
+                    //IndexFormat = "superlogger-{0:yyy.MM.dd}"
                 })
                 .CreateLogger();
+
+            Serilog.Debugging.SelfLog.Enable(Console.Out);
+        }
+
+        private static string DecideIndex(LogEvent arg1, DateTimeOffset arg2)
+        {
+            return "superlogs";
         }
 
         public static void Write(LogInfo infoToLog)
@@ -67,7 +77,7 @@ namespace SuperSerilogger
 
             if (infoToLog.MessageException != null)
             {
-                _errorLogger.Error(infoToLog.MessageException, "{@UtilizationLogStructure}", objToLog);
+                _errorLogger.Error(infoToLog.MessageException, "{@UtilizationLogStructure}", objToLog);                
             }
             if (infoToLog.LogType == LogType.Utilization)
             {
