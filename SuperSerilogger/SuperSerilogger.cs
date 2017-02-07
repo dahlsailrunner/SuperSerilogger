@@ -77,7 +77,7 @@ namespace SuperSerilogger
             // At this point we are ready to actually write the log entry
             if (infoToLog.MessageException != null)
             {
-                _errorLogger.Error(infoToLog.MessageException, "{@UtilizationLogStructure}", objToLog);                
+                _errorLogger.Information("{@UtilizationLogStructure}", objToLog);                
             }
             if (infoToLog.LogType == LogType.Utilization)
             {
