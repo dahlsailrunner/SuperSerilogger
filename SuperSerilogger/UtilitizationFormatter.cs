@@ -1,12 +1,7 @@
-﻿using Serilog.Formatting;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Serilog.Events;
 using System.IO;
-using Serilog.Sinks.Elasticsearch;
 
 namespace SuperSerilogger
 {

@@ -8,7 +8,7 @@ namespace ConsoleAppForLogging
         static void Main(string[] args)
         {
             var info = new LogInfo(LogType.Utilization);
-            info.SenderTimestamp = DateTime.Now.ToString("O");//.Replace(" ", "T");
+            info.SenderTimestamp = DateTime.Now.ToString("O");
             info.PmcId = "12354";
             info.PmcName = "Dahl Properties";
 
@@ -24,7 +24,7 @@ namespace ConsoleAppForLogging
             catch (Exception ex)
             {
                 var logMsg = new LogInfo(LogType.Utilization);
-                logMsg.SenderTimestamp = DateTime.Now.ToString("O");//.Replace(" ", "T");
+                logMsg.SenderTimestamp = DateTime.Now.ToString("O");
                 logMsg.MessageException = ex;
                 SuperLogger.Write(logMsg);
             }
